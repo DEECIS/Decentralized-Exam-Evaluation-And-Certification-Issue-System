@@ -1,6 +1,9 @@
 <template>
   <div>
-    <section class="hero is-dark">
+<div class="columns is-mobile ">
+  <div class="column is-half is-offset-one-quarter has-background-dark has-text-light">aa</div>
+</div>
+    <!-- <section class="hero is-dark">
       <div class="hero-body">
         <div class="container">
           <h2 class="subtitle">
@@ -20,7 +23,7 @@
 
         </div>
       </div>
-    </section>
+    </section> -->
 
   </div>
 </template>
