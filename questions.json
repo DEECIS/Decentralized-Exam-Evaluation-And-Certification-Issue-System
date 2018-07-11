@@ -1,0 +1,36 @@
+[
+  {
+    "question": "In Unix Shell, what is where for? `where ls`",
+    "options":[
+      "find a file named 'ls'",
+      "find a folder",
+      "find the execution file named `ls`"
+    ]
+  },
+  {
+    "question":"What will you get after type `ls`",
+    "options":[
+      "all files in currect folder",
+      "all folders",
+      "all files and folders"
+    ]
+  },
+  {
+    "question":"What GNU stands for?",
+    "options":[
+      "GNU's Not Unix",
+      "Google NetWork Suite"
+    ]
+  },
+  {
+    "question":"Is Debian based on Ubuntu?",
+    "options":[
+      "true",
+      "false"
+    ]
+  }
+
+
+
+
+]

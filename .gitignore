@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
 build/
+box-img-lg.png
+box-img-sm.png
