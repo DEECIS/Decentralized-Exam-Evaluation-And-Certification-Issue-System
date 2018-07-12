@@ -23,7 +23,7 @@ contract TestDEE{
     uint8 result;
     (, result) = dee.getResult(resultId);
 
-    Assert.equal(uint(r), uint(result) ,"should be equla");
+    Assert.equal(uint(r), uint(result) ,"should be equal");
   }
 
 
