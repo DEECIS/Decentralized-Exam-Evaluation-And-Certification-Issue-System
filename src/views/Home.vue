@@ -1,18 +1,20 @@
 <template>
   <div>
-    <Exam/>
+    <MyHeader/>
+
+  <br/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-import Exam from '@/components/Exam.vue'
+import MyHeader from '@/components/MyHeader.vue'
 
 export default {
   name: 'home',
   components: {
-    Exam
+    MyHeader
   }
 }
 </script>

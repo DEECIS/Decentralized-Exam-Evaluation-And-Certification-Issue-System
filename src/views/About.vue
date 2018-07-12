@@ -1,5 +1,6 @@
 <template>
   <div >
+    <MyHeader/>
     <h3>This is an about page</h3>
     <footer class="footer">
       <div class="content has-text-centered">
@@ -12,3 +13,15 @@
     </footer>
   </div>
 </template>
+<script>
+// @ is an alias to /src
+
+import MyHeader from '@/components/MyHeader.vue'
+
+export default {
+  name: 'home',
+  components: {
+    MyHeader
+  }
+}
+</script>
