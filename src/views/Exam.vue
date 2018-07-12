@@ -44,22 +44,36 @@
       is-offset-2
       ">
 
-      <button class="button"
-      v-if="$route.params.id -1 >=0"
-      @click="prevQuestion()"
-      >Previous</button>
+        <button class="button"
+        v-if="$route.params.id -1 >=0"
+        @click="prevQuestion()"
+        >
+        Previous
+        </button>
+        <button class="button is-primary is-outlined"
+        v-else
+        @click="goHome()"
+        >
+        Home
+        </button>
 
       </div>
 
       <div class="column
-        is-2
-        is-offset-5
-        ">
+      is-2
+      is-offset-4
+      ">
 
         <button class="button"
         v-if="$route.params.id +1 < questions.length"
         @click="nextQuestion()">
         Next</button>
+
+        <button class="button is-primary"
+        v-else
+        @click="gotoChain()">
+        Ready to Push To Chain?</button>
+
 
       </div>
     </div>
@@ -74,16 +88,22 @@ import questions from "@/questions.json"
 export default {
   data(){return {
     questions,
-    question_index: 0
+    question_index: 0,
+    length: 2
     }
   },
-
+  created(){
+    // this.length = questions.length
+    this.question_index = parseInt(this.$route.params.id);
+  },
   mounted(){
     console.log("mounted "+ this.$route.params.id);
-    this.question_index = parseInt(this.$route.params.id);
+
   },
   methods:{
     changeQuestion(i){
+      this.question_index = parseInt(this.$route.params.id);
+
       if (this.question_index + i >=0 &&
        this.question_index + i < this.questions.length){
         this.$router.push({
@@ -102,6 +122,15 @@ export default {
     },
     prevQuestion(){
       this.changeQuestion(-1)
+    },
+    goHome(){
+      this.$router.push({
+          name: "home"
+          }
+      )
+    },
+    gotoChain(){
+      console.log("submit to blockchain");
     }
   }
 }
