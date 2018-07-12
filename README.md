@@ -9,4 +9,4 @@ This is a DApp,
 - Truffle
 - Vue
 
-I use a truffle box, [Yet-Another-Truffle-Vue-Box](https://github.com/tim-hub/Yet-Another-Truffle-Vue-Box) which is altered by based on vue-box to develop this DApp.
+I use a truffle box, [Yet-Another-Truffle-Vue-Box](https://github.com/tim-hub/Yet-Another-Truffle-Vue-Box) which is altered by myself and based on vue-box to develop this DApp.
