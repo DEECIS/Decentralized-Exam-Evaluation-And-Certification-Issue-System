@@ -6,6 +6,8 @@
           <H2 class="title">{{title}}</H2>
           <div id="nav" class="nabbar">
             <router-link to="/">Home</router-link> |
+            <router-link to="/quiz/0">Quiz Demo</router-link> |
+            <router-link to="/result/0">Result</router-link> |
             <router-link to="/about">About</router-link>
           </div>
         </div>
@@ -25,7 +27,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>
