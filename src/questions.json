@@ -1,6 +1,6 @@
 [
   {
-    "question": "In Unix Shell, what is where for? `where ls`",
+    "question": "In Unix Shell, what is `where` for? for example, `where ls`",
     "options":[
       "find a file named 'ls'",
       "find a folder",
