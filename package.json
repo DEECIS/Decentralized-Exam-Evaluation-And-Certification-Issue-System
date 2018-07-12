@@ -10,13 +10,14 @@
   "author": "Tim(github.com/tim-hub)",
   "license": "MIT",
   "dependencies": {
+    "bulma": "^0.7.1",
     "truffle-contract": "^3.0.3",
+    "vee-validate": "^2.1.0-beta.6",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
+    "vue-session": "^1.0.0",
     "vuex": "^3.0.1",
-    "web3": "0.20.2",
-    "vee-validate": "^2.1.0-beta.6",
-    "bulma": "^0.7.1"
+    "web3": "0.20.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-alpha.11",
