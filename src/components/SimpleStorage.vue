@@ -96,34 +96,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-.content {
-  padding: 13px 13px 39px 13px;
-}
-.message {
-  background: #eee;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 13px;
-  line-height: 1;
-  padding: 13px;
-}
-</style>

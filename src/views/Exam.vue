@@ -24,17 +24,22 @@
       is-offset-3
       ">
 
-        <div class="control">
-          <ul v-for="option in questions[this.$route.params.id].options">
+
+        <form autocomplete="off" class="control">
+          <ul v-for="(value, key) in questions[this.$route.params.id].options">
             <li>
-          <label class="radio has-background-light">
-            <input type="radio" name="answer">
-            {{option}}
+          <label
+          @click="selectAnswer(key)"
+          class="radio has-background-light">
+
+            <input type="radio" name="answer" :checked = "checkRadioChecked(key)">
+            {{value}}
+
           </label>
             </li>
             <br/>
           </ul>
-        </div>
+        </form>
       </div>
     </div>
 
@@ -89,7 +94,8 @@ export default {
   data(){return {
     questions,
     question_index: 0,
-    length: 2
+    length: 2,
+    answers: [0,0,0,0]
     }
   },
   created(){
@@ -129,8 +135,15 @@ export default {
           }
       )
     },
+    checkRadioChecked(key){
+      return key == this.answers[parseInt(this.$route.params.id)]
+    },
+    selectAnswer(i){
+      this.answers[parseInt(this.$route.params.id)] = i;
+    },
     gotoChain(){
-      console.log("submit to blockchain");
+
+      console.log("submit to blockchain " + this.answers);
     }
   }
 }
