@@ -10,12 +10,12 @@ contract TestDEE{
   uint8 r;
   function testRightAnswers() public {
 
-    uint8[4] memory answers = [2, 2,1,1];
+    uint8[5] memory answers = [2, 2,1,1, 0];
 
 
     (r,  resultId) = dee.upload(answers);
 
-    Assert.equal(uint(r), uint(4),  "should be equal");
+    Assert.equal(uint(r), uint(5),  "should be equal");
   }
 
   function testGetById() public {
