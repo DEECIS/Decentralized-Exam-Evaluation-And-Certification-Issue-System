@@ -157,8 +157,10 @@ export default {
       this.message = "Transaction started";
       return this.DEE.deployed()
         .then((instance) => instance.upload(this.answers,  {from: base.accounts[0]}))
-        .then(() => {
+        .then((r) => {
           this.message = "Transaction done"
+
+          console.log(r.toNumber());
 
           // this.getNationality();
         })
