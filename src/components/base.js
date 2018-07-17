@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import contract from 'truffle-contract'
-import artifacts from '../../build/contracts/CountryList.json'
+import artifacts from '../../build/contracts/DEEContract.json'
 
 const CL = contract(artifacts)
 let accounts;
@@ -9,6 +9,8 @@ export default{
   CL,
   accounts: this.accounts,
   initWeb3(){
+    console.log("init web3");
+
     if (typeof web3 !== 'undefined') {
       console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 Fluyd, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
       // Use Mist/MetaMask's provider
@@ -34,12 +36,15 @@ export default{
 
       this.accounts = accs;
       this.account = accs[0];
+
+
+
       web3.eth.getBalance(this.account, (err, balance) => {
         this.balance = web3.fromWei(balance, "ether") + " ETH"
-        console.log("account: "+this.account +"" + this.balance);
+        console.log("account: "+this.account +" " + this.balance);
       });
 
-      // console.log(this.account +"" + this.balance);
+      // console.log(this.account +" " + this.balance);
 
 
       CL.deployed()

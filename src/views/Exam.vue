@@ -7,7 +7,7 @@
       has-background-dark
       has-text-light
       ">
-        <h4>Quiz {{this.$route.params.id}}:</h4>
+        <h4>Quiz {{this.$route.params.id}}: {{message}}</h4>
         <br/>
         <p>
         {{ questions[this.$route.params.id].question }}
@@ -89,16 +89,27 @@
 </template>
 <script>
 import questions from "@/questions.json"
+import base from "@/components/base.js"
 
 export default {
   data(){return {
+    message: "",
     questions,
     question_index: 0,
     length: 2,
-    answers: [0,0,0,0]
+    answers: [0,0,0,0,0 ]
     }
   },
   created(){
+    console.log("created "+ this.$route.params.id);
+
+    // init web3
+    base.initWeb3();
+    // set the country list
+    this.DEE = base.CL;
+
+
+
     // this.length = questions.length
     this.question_index = parseInt(this.$route.params.id);
   },
@@ -142,6 +153,19 @@ export default {
       this.answers[parseInt(this.$route.params.id)] = i;
     },
     gotoChain(){
+
+      this.message = "Transaction started";
+      return this.DEE.deployed()
+        .then((instance) => instance.upload(this.answers,  {from: base.accounts[0]}))
+        .then(() => {
+          this.message = "Transaction done"
+
+          // this.getNationality();
+        })
+        .catch((e) => {
+          console.error(e)
+          this.message = "Transaction failed"
+        })
 
       console.log("submit to blockchain " + this.answers);
     }
