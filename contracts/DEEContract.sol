@@ -7,12 +7,12 @@ contract DEEContract {
     uint8 result;
   }
 
-  uint8[4] answers = [2, 2,1,1];
+  uint8[5] answers = [2, 2,1,1, 0];
 
   mapping(address => bytes32) addressToid;
   mapping(bytes32 => Result) idToResult;
 
-  function _evaluate(uint8[4] _answers) internal returns (uint8 r, bytes32 resultId){
+  function _evaluate(uint8[5] _answers) internal returns (uint8 r, bytes32 resultId){
     r = 0;
     for (uint8 i=0; i<_answers.length; i++){
       if(_answers[i] == answers[i]){
@@ -25,7 +25,7 @@ contract DEEContract {
     idToResult[resultId] = Result(msg.sender, r);
   }
 
-  function upload(uint8[4] _answers) public returns (uint8 r, bytes32 resultId) {
+  function upload(uint8[5] _answers) public returns (uint8 r, bytes32 resultId) {
     return _evaluate(_answers);
   }
 
