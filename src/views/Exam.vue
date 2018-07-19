@@ -109,6 +109,28 @@ export default {
     this.DEE = base.CL;
 
 
+    // set the event for new evulation
+    var resultEvent;
+    this.DEE.deployed()
+        .then((instance) => resultEvent = instance.Evaluation())
+        .then((r) => {
+          this.message = "Event Setting up"
+          console.log(r);
+          resultEvent.watch(function(error, result){
+                  if (!error)
+                  {
+                      console.log(result);
+                  } else {
+                      $("#loader").hide();
+                      console.log(error);
+                  }
+              });
+
+        })
+        .catch((e) => {
+          console.error(e)
+          this.message = "Event Setting up failed"
+        })
 
     // this.length = questions.length
     this.question_index = parseInt(this.$route.params.id);
@@ -154,15 +176,25 @@ export default {
     },
     gotoChain(){
 
+      let a;
+
       this.message = "Transaction started";
+
+      // a= this.DEE.deployed.instance.upload(this.answers);
+      // console.log(a);
       return this.DEE.deployed()
-        .then((instance) => instance.upload(this.answers,  {from: base.accounts[0]}))
+        .then((instance) =>  instance.upload(this.answers,  {from: base.accounts[0]}))
         .then((r) => {
           this.message = "Transaction done"
+          // it is not allowed to get the reuslt from a send trasication method call
+          console.log(r);
 
-          console.log(r.toNumber());
+          // so use a view function call here
 
-          // this.getNationality();
+
+
+
+
         })
         .catch((e) => {
           console.error(e)
