@@ -2,10 +2,17 @@ pragma solidity ^0.4.18;
 
 contract DEEContract {
 
+
+
   struct Result {
     address  sender;
     uint8 result;
   }
+
+  event Evaluation(
+    address  sender,
+    uint8 result
+  );
 
   uint8[5] answers = [2, 2,1,1, 0];
 
@@ -23,6 +30,9 @@ contract DEEContract {
 
     addressToid[msg.sender] = resultId;
     idToResult[resultId] = Result(msg.sender, r);
+    // emit the event
+    emit Evaluation(msg.sender, r);
+
   }
 
   function upload(uint8[5] _answers) public returns (uint8 r, bytes32 resultId) {
