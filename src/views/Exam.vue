@@ -120,6 +120,11 @@ export default {
                   if (!error)
                   {
                       console.log(result);
+                      if (result.args.sender === base.accounts[0] ){
+                        // alert("Your result is " + result.args.result);
+                        console.log("Your result " + result.args.sender + " " + result.args.result );
+                      }
+
                   } else {
                       $("#loader").hide();
                       console.log(error);
@@ -188,12 +193,7 @@ export default {
           this.message = "Transaction done"
           // it is not allowed to get the reuslt from a send trasication method call
           console.log(r);
-
           // so use a view function call here
-
-
-
-
 
         })
         .catch((e) => {
