@@ -120,11 +120,13 @@ export default {
                   if (!error)
                   {
                       console.log(result);
+                      // only log users'own result
                       if (result.args.sender === base.accounts[0] ){
                         // alert("Your result is " + result.args.result);
-                        console.log("Your result " + result.args.sender + " " + result.args.result );
+                        console.log("Your result " + result.args.sender + " " +
+                         result.args.result.toNumber() +" " +
+                         result.args.id);
                       }
-
                   } else {
                       $("#loader").hide();
                       console.log(error);
@@ -142,7 +144,6 @@ export default {
   },
   mounted(){
     console.log("mounted "+ this.$route.params.id);
-
   },
   methods:{
     changeQuestion(i){
@@ -200,7 +201,6 @@ export default {
           console.error(e)
           this.message = "Transaction failed"
         })
-
       console.log("submit to blockchain " + this.answers);
     }
   }
