@@ -1,7 +1,12 @@
 <template>
   <div>
     <MyHeader/>
-  <div>
+  <div v-if="this.$route.params.id==0">
+    {{date}}
+    {{getCertId()}}
+  </div>
+  <div v-else>
+    {{getScore()}}
     <img src="@/assets/reward.jpg"/>
   </div>
   </div>
@@ -9,7 +14,6 @@
 <script>
 
 // @ is an alias to /src
-
 import MyHeader from '@/components/MyHeader.vue'
 import base from "@/components/base.js"
 
@@ -20,7 +24,11 @@ export default {
   },
   data() {
     return {
-      id:0
+      id:0,
+      address: 0,
+      result: 100,
+      issue: "DEE | Decentralized Exam Evaluation And Certification Issue System",
+      date: new Date()
     }
   },
   created(){
@@ -33,10 +41,27 @@ export default {
 
     this.id = parseInt(this.$route.params.id);
 
-    if (this.id == 0){
+  },
+  mounted(){
+  },
+  methods:{
+    getCertId(){
+      console.log("Getting cert id");
+      this.message = "Getting cert id"
 
-    }else{
+      this.DEE.deployed().
+        then((instance) => instance.getTestId() ).
+          then((r) => {
+            console.log(r)
+            this.id = r;
 
+        }).catch((e) => {
+          console.error(e)
+          this.message = "Got cert id failed"
+        });
+    },
+    getScore(){
+      console.log("Getting the test score");
     }
   }
 }
