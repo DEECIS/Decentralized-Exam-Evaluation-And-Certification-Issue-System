@@ -11,6 +11,7 @@ contract DEEContract {
 
   event Evaluation(
     address  sender,
+    bytes32 id,
     uint8 result
   );
 
@@ -31,7 +32,7 @@ contract DEEContract {
     addressToid[msg.sender] = resultId;
     idToResult[resultId] = Result(msg.sender, r);
     // emit the event
-    emit Evaluation(msg.sender, r);
+    emit Evaluation(msg.sender,  resultId, r);
 
   }
 
@@ -43,6 +44,10 @@ contract DEEContract {
     return idToResult[addressToid[msg.sender]].result;
 
   }
+  function getTestId()public view returns (bytes32 id){
+    return addressToid[msg.sender];
+  }
+
   function getResult(bytes32 _id) public view returns(address addr, uint8 r){
     addr = idToResult[_id].sender;
     r= idToResult[_id].result;
