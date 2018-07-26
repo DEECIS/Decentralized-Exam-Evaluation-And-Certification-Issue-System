@@ -1,41 +1,42 @@
 <template>
   <div>
-    <MyHeader/>
-  <div v-if="this.$route.params.id==0">
-    <div class="container">
-      <div class="notification">
-        Your account is
-        <p>{{base.accounts[0]}}</p>
-        {{getCertId()}}
-        <br/>
-        <p>The certification id is </p>
-        <p>
-          <router-link :to="{ name: 'result', params: { id: id }}">
-            {{id}}
-            </router-link>
-        </p>
+
+    <div v-if="this.$route.params.id==0">
+      <MyHeader/>
+      <div class="container">
+        <div class="notification">
+          Your account is
+          <p>{{base.accounts[0]}}</p>
+          {{getCertId()}}
+          <br/>
+          <p>The certification id is </p>
+          <p>
+            <router-link :to="{ name: 'result', params: { id: id }}">
+              {{id}}
+              </router-link>
+          </p>
+        </div>
       </div>
-    </div>
-
-  </div>
-  <div v-else>
-    <div
-    class="result"
-
-    >
-    {{getScore()}}
-    {{date.getDate()}}-{{date.getMonth()}}-{{date.getFullYear()}}
-    </div>
-
-    <div
-    :style="{ 'background-image' : 'url(\'' + 'https://bulma.io/images/css-book/css-in-44-minutes-book-cover@2x.png' + '\')' }"
-    >
-
 
     </div>
+    <div   v-else>
 
-    <!-- <img src="@/assets/reward.jpg"/> -->
-  </div>
+      <div class="result column">
+        <img  src="@/assets/reward.jpg"/>
+        <div class="top-left">
+          To the owner of account:
+          <br/>
+          {{base.accounts[0]}}
+        </div>
+        {{getScore()}}
+        {{date.getDate()}}-{{date.getMonth()}}-{{date.getFullYear()}}
+      </div>
+
+
+
+
+
+    </div>
   </div>
 </template>
 <script>
@@ -52,6 +53,7 @@ export default {
   data() {
     return {
       base,
+      img: "{ background-image : url("+ require('@/assets/reward.jpg') + ")}",
       id:0,
       address: 0,
       result: 100,
@@ -96,9 +98,21 @@ export default {
 }
 </script>
 <style>
+
 .result{
-  background-image: require('https://bulma.io/images/css-book/css-in-44-minutes-book-cover@2x.png');
+  margin-left: 175px;
+  position: relative;
+  text-align: left;
+  height: 608px;
+  width: 850px;
+
 }
+.top-left{
+  position: absolute;
+  top: 220px;
+  left: 80px;
+}
+
 </style>
 
 
