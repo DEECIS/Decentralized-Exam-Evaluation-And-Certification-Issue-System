@@ -5,7 +5,7 @@
     <div class="container">
       <div class="notification">
         Your account is
-        <p>{{address}}</p>
+        <p>{{base.accounts[0]}}</p>
         {{getCertId()}}
         <br/>
         <p>The certification id is </p>
@@ -19,9 +19,22 @@
 
   </div>
   <div v-else>
+    <div
+    class="result"
+
+    >
     {{getScore()}}
     {{date.getDate()}}-{{date.getMonth()}}-{{date.getFullYear()}}
-    <img src="@/assets/reward.jpg"/>
+    </div>
+
+    <div
+    :style="{ 'background-image' : 'url(\'' + 'https://bulma.io/images/css-book/css-in-44-minutes-book-cover@2x.png' + '\')' }"
+    >
+
+
+    </div>
+
+    <!-- <img src="@/assets/reward.jpg"/> -->
   </div>
   </div>
 </template>
@@ -38,6 +51,7 @@ export default {
   },
   data() {
     return {
+      base,
       id:0,
       address: 0,
       result: 100,
@@ -81,5 +95,11 @@ export default {
   }
 }
 </script>
+<style>
+.result{
+  background-image: require('https://bulma.io/images/css-book/css-in-44-minutes-book-cover@2x.png');
+}
+</style>
+
 
 
