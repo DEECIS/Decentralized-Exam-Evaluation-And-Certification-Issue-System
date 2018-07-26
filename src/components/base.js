@@ -8,6 +8,7 @@ let accounts;
 export default{
   CL,
   accounts: this.accounts,
+  account: this.account,
   initWeb3(){
     console.log("init web3");
 
