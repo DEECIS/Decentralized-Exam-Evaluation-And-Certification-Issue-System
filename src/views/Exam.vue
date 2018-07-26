@@ -92,6 +92,7 @@ import questions from "@/questions.json"
 import base from "@/components/base.js"
 
 export default {
+  name: "Quiz Demo",
   data(){return {
     message: "",
     questions,
