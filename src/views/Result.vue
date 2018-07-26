@@ -2,11 +2,25 @@
   <div>
     <MyHeader/>
   <div v-if="this.$route.params.id==0">
-    {{date}}
-    {{getCertId()}}
+    <div class="container">
+      <div class="notification">
+        Your account is
+        <p>{{address}}</p>
+        {{getCertId()}}
+        <br/>
+        <p>The certification id is </p>
+        <p>
+          <router-link :to="{ name: 'result', params: { id: id }}">
+            {{id}}
+            </router-link>
+        </p>
+      </div>
+    </div>
+
   </div>
   <div v-else>
     {{getScore()}}
+    {{date.getDate()}}-{{date.getMonth()}}-{{date.getFullYear()}}
     <img src="@/assets/reward.jpg"/>
   </div>
   </div>
@@ -40,6 +54,7 @@ export default {
     this.DEE = base.CL;
 
     this.id = parseInt(this.$route.params.id);
+    this.address = base.accounts[0];
 
   },
   mounted(){

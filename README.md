@@ -13,3 +13,4 @@ I use a truffle box, [Yet-Another-Truffle-Vue-Box](https://github.com/tim-hub/Ye
 
 ## Ideas
 - one way to avoid users keep taking exam again and again to get higher score is to increase the fee automatically, like * 2, or ^ 2.
+- add a print button in certification page.
