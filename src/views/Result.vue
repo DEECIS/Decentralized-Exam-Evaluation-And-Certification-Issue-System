@@ -1,20 +1,27 @@
 <template>
   <div>
 
-    <div v-if="this.$route.params.id==0 ">
+    <div v-if="$route.params.id == 0 || $route.params.id == empty_id">
+      <!-- default page of result, account + id -->
       <MyHeader/>
       <div class="container">
         <div class="notification">
-          Your account is
-          <p>{{base.account}}</p>
-          {{getCertId()}}
-          <br/>
-          <div v-if="id != 0x0000000000000000000000000000000000000000">
+
+          <div v-if = "base.account">
+            <!-- detect web3 -->
+            Your account is
+            <p>{{base.account}}</p>
+            {{getCertId()}}
+            <br/>
+          </div>
+
+          <div v-if="id != empty_id">
+            <!-- detect cert id -->
             <p>The certification id is </p>
             <p>
               <router-link :to="{ name: 'result', params: { id: id }}">
                 {{id}}
-                </router-link>
+              </router-link>
             </p>
           </div>
           <div v-else>
@@ -27,18 +34,46 @@
             <p>
               Or you can search the certification through cert id.
             </p>
-            <form>
-              <input type="text" />
-              <input type="submit" />
-            </form>
+            <br/>
+            <div>
+              <div class="field">
+                <div class="control">
+                  <input
+                  v-validate="'required|length:66|is_not:empty_id'"
+                  class="input is-primary is-rounded"
+                  v-model="id_input"
+                  name="cert_id"
+                  type="text" placeholder="the cert id">
+                </div>
+              </div>
+
+              <p>
+                {{id_input}}
+              </p>
+              <p>
+                <span class="has-text-danger">{{ errors.first('cert_id') }}</span>
+              </p>
+
+              <button
+              @click="search()"
+              class="button is-primary">
+                Search
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
     </div>
     <div v-else>
-      <div class="result column">
-        {{getScore()}}
+      {{getScore()}}
+      <!-- show certification -->
+      <div v-if="id != empty_id ">
+        <MyHeader/>
+        <p>Cannot found, please check the cert id.</p>
+      </div>
+      <div v-else class="result column">
+
         <img  src="@/assets/reward.jpg"/>
         <div class="top-left">
           <strong>To the owner of account:</strong>
@@ -85,7 +120,10 @@ export default {
       base,
       Exam,
       img: "{ background-image : url("+ require('@/assets/reward.jpg') + ")}",
-      id:0,
+      empty_id: '0x0000000000000000000000000000000000000000000000000000000000000000',
+      id:'0x0000000000000000000000000000000000000000000000000000000000000000', // the default bytes 32
+      id_input: '',
+      input_notice: '',
       version: 0,
       block_num: 0,
       address: "",
@@ -129,6 +167,7 @@ export default {
     },
     getScore(){
       console.log("Getting the test score");
+
       this.DEE.deployed().
         then((instance) => instance.getResult(this.$route.params.id)).
           then((r) => {
@@ -144,9 +183,25 @@ export default {
 
 
         }).catch((e) => {
-          console.error(e)
-          this.message = "Got cert id failed"
+          console.error(e);
+          // this.address = '0x0000000000000000000000000000000000000000000000000000000000000000';
+          this.message = "Got cert id failed";
         });
+    },
+    isValidId(id){
+
+      if (id !== "" && id !=="0" && id.substring(0,2) == "0x"){
+        return true;
+      }
+      return false;
+    },
+    search(){
+      if ( this.isValidId(this.id_input) ){
+        // this.getScore();
+        this.$router.push({ name: 'result', params: { id: this.id_input }});
+        // this.getScore();
+        location.reload();
+      }
     }
   }
 }
