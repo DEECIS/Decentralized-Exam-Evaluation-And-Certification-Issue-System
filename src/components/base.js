@@ -9,6 +9,7 @@ export default{
   CL,
   accounts: this.accounts,
   account: this.account,
+  web3: this.web3,
   initWeb3(){
     console.log("init web3");
 
@@ -23,6 +24,8 @@ export default{
       // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
       web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
     }
+
+    // this.web3=web3;
 
     CL.setProvider(web3.currentProvider)
     web3.eth.getAccounts((err, accs) => {

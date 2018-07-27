@@ -1,33 +1,49 @@
 <template>
   <div>
 
-    <div v-if="this.$route.params.id==0">
+    <div v-if="this.$route.params.id==0 ">
       <MyHeader/>
       <div class="container">
         <div class="notification">
           Your account is
-          <p>{{base.accounts[0]}}</p>
+          <p>{{base.account}}</p>
           {{getCertId()}}
           <br/>
-          <p>The certification id is </p>
-          <p>
-            <router-link :to="{ name: 'result', params: { id: id }}">
-              {{id}}
+          <div v-if="id != 0x0000000000000000000000000000000000000000">
+            <p>The certification id is </p>
+            <p>
+              <router-link :to="{ name: 'result', params: { id: id }}">
+                {{id}}
+                </router-link>
+            </p>
+          </div>
+          <div v-else>
+            <p>It looks like you have not tested before.</p>
+            <p>
+              <router-link :to="{ name: 'quiz', params: { id: 0 }}">
+                Quiz
               </router-link>
-          </p>
+            </p>
+            <p>
+              Or you can search the certification through cert id.
+            </p>
+            <form>
+              <input type="text" />
+              <input type="submit" />
+            </form>
+          </div>
         </div>
       </div>
 
     </div>
-    <div   v-else>
-
+    <div v-else>
       <div class="result column">
         {{getScore()}}
         <img  src="@/assets/reward.jpg"/>
         <div class="top-left">
           <strong>To the owner of account:</strong>
           <br/>
-          {{base.accounts[0]}}
+          {{address}}
         </div>
 
         <div class="in-center">
@@ -44,10 +60,11 @@
 
         <div class="bottom-right">
           Issued by <span class="is-size-4">DEE</span>
-          <p>{{date.getDate()}}-{{date.getMonth()}}-{{date.getFullYear()}}</p>
+          <p>Version: {{version}} | Issuded In Block: {{block_num}}</p>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -69,7 +86,9 @@ export default {
       Exam,
       img: "{ background-image : url("+ require('@/assets/reward.jpg') + ")}",
       id:0,
-      address: 0,
+      version: 0,
+      block_num: 0,
+      address: "",
       result: 100,
       issue: "DEE | Decentralized Exam Evaluation And Certification Issue System",
       date: new Date()
@@ -84,10 +103,11 @@ export default {
     this.DEE = base.CL;
 
     this.id = parseInt(this.$route.params.id);
-    this.address = base.accounts[0];
+
 
   },
   mounted(){
+    // this.address = base.accounts[0];
   },
   methods:{
     getCertId(){
@@ -100,6 +120,8 @@ export default {
             console.log(r)
             this.id = r;
 
+            // getScore(r);
+
         }).catch((e) => {
           console.error(e)
           this.message = "Got cert id failed"
@@ -107,6 +129,24 @@ export default {
     },
     getScore(){
       console.log("Getting the test score");
+      this.DEE.deployed().
+        then((instance) => instance.getResult(this.$route.params.id)).
+          then((r) => {
+            console.log(r)
+            this.address = r[0];
+            var result = r[1].toNumber();
+            var total = r[2].toNumber();
+
+            this.result = (result.toFixed(4) / total * 100).toFixed(2);
+
+            this.version = r[3].toNumber();
+            this.block_num = r[4].toNumber();
+
+
+        }).catch((e) => {
+          console.error(e)
+          this.message = "Got cert id failed"
+        });
     }
   }
 }

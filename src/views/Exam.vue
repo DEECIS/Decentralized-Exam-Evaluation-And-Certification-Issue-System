@@ -92,7 +92,7 @@ import questions from "@/questions.json"
 import base from "@/components/base.js"
 
 export default {
-  name: "Quiz Demo",
+  name: "QuizDemo",
   data(){return {
     message: "",
     questions,
@@ -120,13 +120,13 @@ export default {
           resultEvent.watch(function(error, result){
                   if (!error)
                   {
-                      console.log(result);
+                      // console.log(result);
                       // only log users'own result
                       if (result.args.sender === base.accounts[0] ){
                         // alert("Your result is " + result.args.result);
-                        console.log("Your result " + result.args.sender + " " +
-                         result.args.result.toNumber() +" " +
-                         result.args.id);
+                        // console.log("Your result " + result.args.sender + " " +
+                        //  result.args.result.toNumber() +" " +
+                        //  result.args.id);
                       }
                   } else {
                       $("#loader").hide();
