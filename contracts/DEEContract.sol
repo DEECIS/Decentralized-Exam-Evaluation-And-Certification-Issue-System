@@ -35,7 +35,7 @@ contract DEEContract {
 
 
 
-    idToResult[resultId] = Result(msg.sender, r, answers.length, idToResult[resultId].version++, block.number);
+    idToResult[resultId] = Result(msg.sender, r, answers.length, idToResult[resultId].version+1, block.number);
     // emit the event
     emit Evaluation(msg.sender,  resultId);
 

@@ -68,7 +68,7 @@
     <div v-else>
       {{getScore()}}
       <!-- show certification -->
-      <div v-if="id != empty_id ">
+      <div v-if=" !cert_found ">
         <MyHeader/>
         <p>Cannot found, please check the cert id.</p>
       </div>
@@ -120,10 +120,11 @@ export default {
       base,
       Exam,
       img: "{ background-image : url("+ require('@/assets/reward.jpg') + ")}",
+      empty_address: '0x0000000000000000000000000000000000000000',
       empty_id: '0x0000000000000000000000000000000000000000000000000000000000000000',
       id:'0x0000000000000000000000000000000000000000000000000000000000000000', // the default bytes 32
       id_input: '',
-      input_notice: '',
+      cert_found: false,
       version: 0,
       block_num: 0,
       address: "",
@@ -173,6 +174,13 @@ export default {
           then((r) => {
             console.log(r)
             this.address = r[0];
+
+            if (this.address != this.empty_address){
+              this.cert_found = true;
+            }else{
+              this.cert_found = false;
+            }
+
             var result = r[1].toNumber();
             var total = r[2].toNumber();
 
@@ -184,6 +192,7 @@ export default {
 
         }).catch((e) => {
           console.error(e);
+          this.cert_found = false;
           // this.address = '0x0000000000000000000000000000000000000000000000000000000000000000';
           this.message = "Got cert id failed";
         });
