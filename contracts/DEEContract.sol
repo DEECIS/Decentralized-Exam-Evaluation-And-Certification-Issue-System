@@ -7,12 +7,14 @@ contract DEEContract {
   struct Result {
     address  sender;
     uint8 result;
+    uint256 length;
+    uint8 version;
+    uint256 block_num;
   }
 
   event Evaluation(
     address  sender,
-    bytes32 id,
-    uint8 result
+    bytes32 id
   );
 
   uint8[5] answers = [2, 2,1,1, 0];
@@ -30,9 +32,12 @@ contract DEEContract {
     resultId= keccak256(abi.encodePacked(now, msg.sender, block.timestamp, r));
 
     addressToid[msg.sender] = resultId;
-    idToResult[resultId] = Result(msg.sender, r);
+
+
+
+    idToResult[resultId] = Result(msg.sender, r, answers.length, idToResult[resultId].version++, block.number);
     // emit the event
-    emit Evaluation(msg.sender,  resultId, r);
+    emit Evaluation(msg.sender,  resultId);
 
   }
 
@@ -48,8 +53,15 @@ contract DEEContract {
     return addressToid[msg.sender];
   }
 
-  function getResult(bytes32 _id) public view returns(address addr, uint8 r){
+  function getResult(bytes32 _id) public view returns(address addr, uint8 r,
+  uint256 l,
+  uint8 v,
+  uint256 block_number )
+  {
     addr = idToResult[_id].sender;
     r= idToResult[_id].result;
+    l = idToResult[_id].length;
+    v= idToResult[_id].version;
+    block_number = idToResult[_id].block_num;
   }
 }
