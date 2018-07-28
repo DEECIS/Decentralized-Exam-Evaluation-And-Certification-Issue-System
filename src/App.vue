@@ -20,7 +20,7 @@
 export default {
   data(){
     return {
-        "title": "Decentralized Exam Evaluation And Certification Issue System"
+        title: "Decentralized Exam Evaluation And Certification Issue System"
         }
   },
 }
