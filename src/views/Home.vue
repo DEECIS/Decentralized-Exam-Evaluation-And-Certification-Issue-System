@@ -29,8 +29,14 @@
           Feel free to try it
         </h2>
 
+
         <p>
           Open the <router-link :to="{ name: 'quiz', params: { id: 0 }}">quiz demo</router-link> to try it and know more about the working porcess.
+        </p>
+
+        <p class="has-text-danger">
+          Currently it is running on testing network, and web3/Metamask is required.
+
         </p>
 
         <p>
