@@ -74,7 +74,7 @@
         @click="nextQuestion()">
         Next</button>
 
-        <button class="button is-primary"
+        <button :class="submitBtnClass"
         v-else
         @click="gotoChain()">
         Ready to Push To Chain?</button>
@@ -93,12 +93,24 @@ import base from "@/components/base.js"
 
 export default {
   name: "QuizDemo",
-  data(){return {
-    message: "",
-    questions,
-    question_index: 0,
-    length: 2,
-    answers: [0,0,0,0,0 ]
+  data(){
+    return {
+      message: "",
+      questions,
+      question_index: 0,
+      length: 2,
+      answers: [0,0,0,0,0 ],
+      isSubmitting: false,
+      isSubmitted: false
+    }
+  },
+  computed:{
+    submitBtnClass() {
+      if (!this.isSubmitting){
+        return "button is-primary";
+      }else{
+        return "button is-primary is-loading"
+      }
     }
   },
   created(){
@@ -182,20 +194,26 @@ export default {
       this.answers[parseInt(this.$route.params.id)] = i;
     },
     gotoChain(){
-
       let a;
 
       this.message = "Transaction started";
+
+      this.isSubmitting= true;
 
       // a= this.DEE.deployed.instance.upload(this.answers);
       // console.log(a);
       return this.DEE.deployed()
         .then((instance) =>  instance.upload(this.answers,  {from: base.accounts[0]}))
         .then((r) => {
-          this.message = "Transaction done"
+          this.message = "Transaction done";
+
           // it is not allowed to get the reuslt from a send trasication method call
           console.log(r);
           // so use a view function call here
+
+          this.isSubmitting =false;
+
+          this.$router.push({ name: 'result', params: { id: 0 }});
 
         })
         .catch((e) => {
