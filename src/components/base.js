@@ -3,6 +3,7 @@ import contract from 'truffle-contract'
 import artifacts from '../../build/contracts/DEEContract.json'
 
 const CL = contract(artifacts)
+// const CL = contract(artifacts, "0x26275b874e26dfd8bbb1eea4f65e01e1e8d9ae63")
 let accounts;
 
 export default{

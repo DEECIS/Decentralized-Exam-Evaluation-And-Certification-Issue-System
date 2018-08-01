@@ -13,6 +13,13 @@ This is a DApp,
 - - vue-router
 - - bulma
 
+## How to
+- open `ganache`
+- `truffle compile`
+- `truffle migrate` // default to run on local test network
+- use `yarn serve` to run the dapp (metamask required)
+
+
 I use a truffle box, [Yet-Another-Truffle-Vue-Box](https://github.com/tim-hub/Yet-Another-Truffle-Vue-Box) which is altered by myself and based on vue-box to develop this DApp.
 
 Bulma is used in vue front-end project for the layour and style.
