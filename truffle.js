@@ -3,18 +3,21 @@ require('babel-register')
 
 module.exports = {
   networks: {
-    ropsten: {
-      host: "127.0.0.1",
-      port: 8545,
-      network_id: 3,
-      // gas: 40000,
-      // gasLimit : 9999999999
-    },
     development: {
       host: '127.0.0.1',
-      port: 7545,
+      port: 7545, // ganache
       network_id: '*', // Match any network id
 
-    }
-  }
+    },
+    ropsten:  {
+      network_id: 3,
+      host: "localhost",
+      port:  8545,
+      gas:   2900000
+    },
+  },
+  // rpc: {
+  //   host: 'localhost',
+  //   post:8080
+  //   }
 }
